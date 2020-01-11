@@ -1,0 +1,21 @@
+{
+  "name": "xdean-util",
+  "version": "0.0.1",
+  "description": "XDean's Utilities",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "repository": "https://github.com/XDean/nodejs-util",
+  "author": "XDean",
+  "license": "Apache-2.0",
+  "private": false,
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^3.7.4",
+    "webpack": "^4.41.5"
+  },
+  "files": [
+    "lib/**/*"
+  ]
+}
