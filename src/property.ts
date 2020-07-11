@@ -1,3 +1,5 @@
+import {useEffect, useState} from "react";
+
 export interface Listener<T> {
     (p: Property<T>, o: T, n: T): void
 }
@@ -96,4 +98,28 @@ class NestProperty<F, T> extends Property<T> {
     set value(value: T) {
         this.current.value = value
     }
+}
+
+export function useProperty<S extends (any | any[])>(p: Property<S>): S {
+    let [state, setState] = useState<S>(() => p.value);
+    useEffect(() => {
+        setState(p.value);
+        const listener: Listener<S> = (ob, o, n) => {
+            setState(n.slice ? n.slice() : n);
+        };
+        p.addListener(listener);
+        return () => p.removeListener(listener);
+    }, [p]);
+    return state
+}
+
+export function usePropertyMap<S, T>(p: Property<S>, f: (s: S) => T): T {
+    let [state, setState] = useState<T>(() => f(p.value));
+    useEffect(() => {
+        setState(f(p.value));
+        const listener: Listener<S> = (ob, o, n) => setState(f(n));
+        p.addListener(listener);
+        return () => p.removeListener(listener);
+    }, [p, f]);
+    return state
 }
