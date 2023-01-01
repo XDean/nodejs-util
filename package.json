@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "typescript": "^3.7.4",
-    "webpack": "^4.41.5"
+    "webpack": "^5.75.0"
   },
   "files": [
     "lib/**/*"
